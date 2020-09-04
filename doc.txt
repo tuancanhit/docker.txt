@@ -1,0 +1,37 @@
+Install docker (Linux) :
+    - sudo apt install docker.io
+    - sudo curl -L https://github.com/docker/compose/releases/download/1.18.0/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose
+    - sudo chmod +x /usr/local/bin/docker-compose
+Run docker without sudo:
+    - sudo groupadd docker
+    - sudo gpasswd -a $USER docker
+    - restart docker
+Use Docker:
+    + Build docker: docker-compose build 
+    + Build docker no cache: docker-compose --no-cache
+    + View docker container: docker ps -a
+    + View docker image: docker images
+    + Remove a container: docker rm container_id
+    + Remove all container: docker rm $(docker ps -a -q)
+    + Remove all images: docker rmi $(docker images -a -q)
+    + Stop all docker container: docker stop $(docker ps -a -q)
+    + Start all dockder container: docker start $(docker ps -a -q)
+    + Run all docker: docker-compose up  / docker-compose up -docker
+    + Down all docker: docker-compose down
+    + Run php cmd: docker exec -it php_container_name bash (if show a notification with 'rsa' use : Ctrl + X)
+    
+    Import database data:
+    - File sql small: 
+        + In folder docker run cmd: docker exec -i mysql_container mysql -u (USERNAME) -p(PASSWORD) name_new_db < db.sql (link to file sql in your pc/laptop)
+            Ex: docker exec -i docker_mysql_1 mysql -u root -proot data < db.sql
+    - File sql large :
+        - Create folder share (docker folder in your real pc/laptop)
+        - Sync from real pc/laptop to container ( at docker-compose.yml )
+        - Go to container bash run cmd: zcat '/var/lib/mysql/tops23_08112019.gz' | mysql -h localhost -P 8080 -u root -p magento23
+            + '/var/lib/mysql/tops23_08112019.gz' is link to file sql in your container
+            + '8080' is mysql port
+            + 'root' is mysql user name
+            + 'magento23' is database existed name
+            
+            
+    Export database:  mysqldump -u root -p database_name | gzip > /var/lib/sharedb/database_name.gz 
