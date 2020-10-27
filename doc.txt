@@ -16,7 +16,7 @@ Use Docker:
     + Remove all images: docker rmi $(docker images -a -q)
     + Stop all docker container: docker stop $(docker ps -a -q)
     + Start all dockder container: docker start $(docker ps -a -q)
-    + Run all docker: docker-compose up  / docker-compose up -docker
+    + Run all docker: docker-compose up  / docker-compose up -d
     + Down all docker: docker-compose down
     + Run php cmd: docker exec -it php_container_name bash (if show a notification with 'rsa' use : Ctrl + X)
     
